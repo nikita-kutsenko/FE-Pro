@@ -11,26 +11,21 @@
 // 2. Если аргумент c передан и он является функцией, то он выполняется после вызова функции sum.
 // 3. Функция f должны возвращать результат функции аргумента c, если он есть, либо результат функции sum.
 
-
 function f (a = 2, b = 3, c) { 
-    debugger;
     function sum (a, b) { 
-        return a + b;  
+        return a + b; 
     } 
-    debugger;
     if ( typeof c === 'function') {
-        debugger;
-        return c(a,b);
-        debugger;
+        result = 'Выполнение заданой функции ' + c(a,b);
+    } else {
+        result = 'Выполнение функции sum ' + sum(a,b);
     }
-    debugger;
+    console.log(result);
 }
 
-function multiply (a , b) {
-    return a * b;
+function multiply(a, b) {
+    return Math.pow(a ,b);
 }
-x = 3;
-y = 5;
-z = multiply(1,2);
-result = f(x, y, z);
-console.log('result', result);
+
+f(3,5,multiply);
+f(3,5,4);
