@@ -1,30 +1,119 @@
-// 1. Сформировать массив объектов, в котором объектом будет Фильм с полем name и price.
-// 2. Вывести в консоль массив с названием фильмов, которые имеют название и цену.
-// 3. Отобразить итоговую стоимость заказа для выше отфильтрованных фильмов.
+// Для пустого объекта employee необходимо создать два свойства:
 
-// all tr 
-trList = document.querySelectorAll('.cinema__item');
+// 1. Первое свойство getUser будет возвращать строку this.getFirstName() + " " + this.getLastName(). 
+// Если у целевого объекта нет полей firstName и lastName, то их необходимо запросить у 
+// пользователя через prompt(). Свойство getUser нельзя удалить, но можно переопределить.
 
-// 1. 
-array = new Array();
+// 2. Второе свойство renderUser отрисует на странице в теге <ul> все поля целевого объекта. 
+// Свойство renderUser нельзя удалить и переопределить.
 
-for ( i = 0; i < trList.length; i++ ) {
-    array[i] = new Object();
 
-    array[i].name = trList[i].children[0].textContent;
-    array[i].price = trList[i].children[1].textContent;
+// Далее, создаем объект User, который будет унаследовать все свойства объекта employee.
+// Для объекта User вызываем методы getUser и renderUser. Метод renderUser должен вывести 
+// на страницу поля объекта, которые не являются функциями.
+
+// Домашку заливаем на github)
+
+class Person {
+    getFirstName() {
+        let firstName = !this.firstName ? this.setFirstName() : this.firstName;
+        return firstName;
+    }
+
+    setFirstName() {
+        this.firstName = prompt('Input first name: ','');
+    }
+
+    getLastName() {
+        let lastName = !this.lastName ? this.setLastName() : this.lastName;
+        return lastName;
+    }
+
+    setLastName() {
+        this.lastName = prompt('Input last name: ','');
+    }
 }
 
-// console.log(trList);
-console.log('1. Array of all films:',  array);
+let employee = new Person();
 
-// 2.
-filteredArray = array.filter( film => film.name != "" &&  film.price != "");
-console.log('2. Filtered array of all films, which have name and price', filteredArray);
 
-// 3.
-filteredArrayPrice = filteredArray.reduce( (total, film) => {
-    // price = 
-    return total += parseInt(film.price);
-}, 0);
-console.log('3. Total price for all films:', filteredArrayPrice, '$');
+// **********************
+// !!! Вопрос в функции getUserFunction !!!
+// **********************
+// Не могу понять почему, но вызов getFirstName и getLastName в функции работает только тогда, 
+// когда эти методы присвоены к переменным или выведенны в консоль. По этой причине 
+// инициализирую их 
+// **********************
+function getUserFunction ( object ) {
+    firstName = object.getFirstName();
+    lastName = object.getLastName();
+    return object.getFirstName() + ' ' + object.getLastName();
+}
+
+function renderUserFunction( object ) {
+    let ul = document.createElement('ul');
+    document.body.appendChild(ul);
+
+    for (key in object) {
+        if( object.hasOwnProperty(key) ){
+            console.log('object[key] :>> ', key);
+            let li = document.createElement('li');
+            li.innerText = object[key];
+
+            ul.appendChild(li);
+        }
+    }
+}
+
+
+Object.defineProperty(employee, 'getUser', {
+    value: getUserFunction(employee),
+    writable: true, 
+    configurable: false,
+    enumerable: true
+});
+
+Object.defineProperty(employee, 'renderUser', {
+    value: renderUserFunction(employee),
+    writable: false, 
+    configurable: false,
+    enumerable: true
+});
+
+console.log('employee :>> ', employee);
+
+
+
+let user = {
+    age: function(){
+        return 10+11;
+    },
+    country: 'Ukraine',
+    city: 'Kiev',
+
+};
+
+user.__proto__ = employee;
+
+Object.defineProperty(user, 'renderUser', {
+    value: renderUserFunction_User(user),
+    writable: false, 
+    configurable: false
+});
+
+function renderUserFunction_User( object ) {
+    let ul = document.createElement('ul');
+    document.body.appendChild(ul);
+
+    for (key in object) {
+        if( object.hasOwnProperty(key) && (typeof object[key] != "function") ) {
+            let li = document.createElement('li');
+            li.innerText = object[key];
+
+            ul.appendChild(li);
+        }
+    }
+}
+
+user.getUser();
+user.renderUser();
