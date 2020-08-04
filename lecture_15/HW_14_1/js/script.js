@@ -1,30 +1,42 @@
-// 1. Сформировать массив объектов, в котором объектом будет Фильм с полем name и price.
-// 2. Вывести в консоль массив с названием фильмов, которые имеют название и цену.
-// 3. Отобразить итоговую стоимость заказа для выше отфильтрованных фильмов.
+// Добавить всем массивам геттер – render, который будет выводить массив в документ, 
+// в виде таблицы (номер ячейки и значение ячейки).
 
-// all tr 
-trList = document.querySelectorAll('.cinema__item');
+let table = document.createElement('table'),
+    thead = document.createElement('thead'),
+    trHead = document.createElement('tr'),
+    th1 = document.createElement('th'),
+    th2 = document.createElement('th');
 
-// 1. 
-array = new Array();
+    tbody = document.createElement('tbody');
 
-for ( i = 0; i < trList.length; i++ ) {
-    array[i] = new Object();
+th1.innerText = 'Number';
+th2.innerText = 'Key';
 
-    array[i].name = trList[i].children[0].textContent;
-    array[i].price = trList[i].children[1].textContent;
-}
+document.body.appendChild(table);
+table.appendChild(thead);
+thead.appendChild(trHead);
+trHead.appendChild(th1);
+trHead.appendChild(th2);
+table.appendChild(tbody);
 
-// console.log(trList);
-console.log('1. Array of all films:',  array);
 
-// 2.
-filteredArray = array.filter( film => film.name != "" &&  film.price != "");
-console.log('2. Filtered array of all films, which have name and price', filteredArray);
+Object.defineProperty(Array.prototype, 'render', {
+    get() {
+        console.log('this :>> ', this);
+        for (let key in this) {
+            let tr = document.createElement('tr'),
+                td1 = document.createElement('td'),
+                td2 = document.createElement('td');
 
-// 3.
-filteredArrayPrice = filteredArray.reduce( (total, film) => {
-    // price = 
-    return total += parseInt(film.price);
-}, 0);
-console.log('3. Total price for all films:', filteredArrayPrice, '$');
+            td1.innerText = key;
+            td2.innerText = this[key];
+    
+            tbody.appendChild(tr);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+        }
+    }
+});
+
+let arr1 = ['A', 'B', 'C', 'D'];
+console.log('arr1.render :>> ', arr1.render);
