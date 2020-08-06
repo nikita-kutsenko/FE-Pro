@@ -93,8 +93,6 @@ let user = {
 
 };
 
-user.__proto__ = employee;
-
 Object.defineProperty(user, 'renderUser', {
     value: renderUserFunction_User(user),
     writable: false, 
@@ -114,6 +112,9 @@ function renderUserFunction_User( object ) {
         }
     }
 }
+
+// user.__proto__ = employee;
+user = Object.create(employee);
 
 user.getUser();
 user.renderUser();
