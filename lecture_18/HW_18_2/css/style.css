@@ -1,0 +1,35 @@
+body {
+    background-color: rgb(249 249 249);
+    margin: 0;
+}
+
+.main {
+    width: 250px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+.block {
+    border-radius: 14px;
+    margin: 0 auto;
+    display: inline-block;
+    background: #ffffff;
+    padding: 24px 48px;
+}
+
+#input {
+    width: 150px;
+    line-height: 20px;
+    font-size: 16px;
+    border: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    border-bottom: 1px solid #494949;
+    color: #494949;
+    outline: none;
+}
+.text {
+    line-height: 20px;
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #494949;
+}
