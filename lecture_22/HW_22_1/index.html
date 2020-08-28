@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HW 22_1</title>
+	<link rel="stylesheet" href="./css/style.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="TaskManager" class="taskManager">
+		<ul class="list">
+			<li v-for="item in list1" class="item"> {{ item.text }} </li>
+
+			<span @click="transferRight" id="transferToRight" class="span">transfer</span>
+		</ul>
+		<ul class="list">
+			<li v-for="item in list2" class="item"> {{ item.text }} </li>
+
+			<span @click="transferLeft" class="span">transfer</span>
+		</ul>
+	</div>
+<script src="js/script.js"></script>
+</body>
+</html>
