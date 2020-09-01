@@ -1,0 +1,14 @@
+body {
+    margin: 0;
+}
+#app {
+    max-width: 1000px;
+}
+.container {
+    display: inline-block;
+    padding: 60px 20px 0;
+}
+
+.block {
+    width: 100px;
+}

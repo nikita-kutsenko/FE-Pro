@@ -1,0 +1,234 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  font-family: 'Roboto', sans-serif;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.wrapper {
+  width: 1440px;
+  margin: 0 auto; }
+
+.container {
+  padding: 0 140px; }
+
+.header {
+  padding-top: 40px;
+  margin-bottom: 40px; }
+  .header-logo {
+    margin-bottom: 78px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 28px;
+    color: #333333;
+    text-transform: uppercase; }
+  .header-welcomeText {
+    font-weight: bold;
+    font-size: 32px;
+    line-height: 44px;
+    color: #333333;
+    text-transform: capitalize; }
+  .header-description {
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 44px;
+    color: #333333; }
+
+.main .getJokes {
+  max-width: 680px;
+  margin-bottom: 40px; }
+  .main .getJokes-form-line {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 26px;
+    color: #333333;
+    user-select: none; }
+    .main .getJokes-form-line:last-of-type {
+      margin-bottom: 20px; }
+    .main .getJokes-form-line-radio {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer; }
+    .main .getJokes-form-line-checkmark {
+      position: absolute;
+      top: 2px;
+      left: 0;
+      height: 20px;
+      width: 20px;
+      border: 2px solid #ABABAB;
+      box-sizing: border-box;
+      border-radius: 50%; }
+      .main .getJokes-form-line-checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+        top: 3px;
+        left: 3px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: #333333; }
+    .main .getJokes-form-line input:checked ~ .getJokes-form-line-checkmark {
+      border: 2px solid #333333; }
+    .main .getJokes-form-line input:checked ~ .getJokes-form-line-checkmark:after {
+      display: block; }
+  .main .getJokes-form-categoriesList {
+    display: none;
+    padding: 10px 0 0;
+    margin-bottom: 10px; }
+    .main .getJokes-form-categoriesList-item {
+      position: relative;
+      display: inline-block;
+      margin-right: 10px;
+      margin-bottom: 10px; }
+      .main .getJokes-form-categoriesList-item-radio {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        margin: 0;
+        width: 100%;
+        height: 100%; }
+      .main .getJokes-form-categoriesList-item-checkmark {
+        display: block;
+        padding: 5px 15px;
+        border: 2px solid #F8F8F8;
+        box-sizing: border-box;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: #ABABAB;
+        cursor: pointer; }
+      .main .getJokes-form-categoriesList-item input:checked ~ .getJokes-form-categoriesList-item-checkmark {
+        background-color: #F8F8F8;
+        color: #333333; }
+  .main .getJokes-form-searchText {
+    display: none;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 2px solid #333333;
+    box-sizing: border-box;
+    border-radius: 10px;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 22px;
+    color: #ABABAB;
+    outline: none; }
+  .main .getJokes-form-btnGetAJoke {
+    padding: 10px 40px;
+    background: linear-gradient(90.55deg, #8EA7FF 0%, #7291FF 100%);
+    border-radius: 10px;
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 22px;
+    color: #FFFFFF;
+    cursor: pointer; }
+
+.main .jokes {
+  max-width: 680px; }
+  .main .jokes .newJoke {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 600px;
+    padding: 67px 40px 40px;
+    margin-bottom: 40px;
+    background: #F8F8F8;
+    border-radius: 20px; }
+    .main .jokes .newJoke-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 20px; }
+    .main .jokes .newJoke-content {
+      max-width: 540px; }
+      .main .jokes .newJoke-content-idLine {
+        margin-bottom: 5px; }
+        .main .jokes .newJoke-content-idLine-title {
+          display: inline-block;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 14px;
+          color: #ABABAB;
+          text-transform: uppercase; }
+        .main .jokes .newJoke-content-idLine-id {
+          display: inline-block;
+          font-weight: 500;
+          font-size: 10px;
+          line-height: 14px;
+          color: #8EA7FF; }
+      .main .jokes .newJoke-content-text {
+        font-weight: normal;
+        font-size: 18px;
+        line-height: 26px;
+        color: #333333;
+        margin-bottom: 22px; }
+      .main .jokes .newJoke-content-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .main .jokes .newJoke-content-info-lastUpdate-text, .main .jokes .newJoke-content-info-lastUpdate-time {
+          display: inline-block;
+          font-weight: normal;
+          font-size: 10px;
+          line-height: 14px;
+          color: #ABABAB; }
+        .main .jokes .newJoke-content-info-lastUpdate-time {
+          font-weight: bold; }
+        .main .jokes .newJoke-content-info-categories {
+          max-width: 300px; }
+          .main .jokes .newJoke-content-info-categories-category {
+            padding: 6px 20px;
+            background: #FFFFFF;
+            border-radius: 6px;
+            font-weight: 500;
+            font-size: 10px;
+            line-height: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #333333; }

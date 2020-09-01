@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>HW 21_1</title>
+	<link rel="stylesheet" href="./css/style.css">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+	<link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+</head>
+<body>
+<div class="wrapper">
+	<header class="header container">
+		<h1 class="header-logo">msi 2020</h1>
+
+		<h2 class="header-welcomeText">hey!</h2>
+		<h3 class="header-description">Let’s try to find a joke for you:</h3>
+	</header>
+
+	<main class="main container">
+		<div class="getJokes">
+			<form action="" class="getJokes-form">
+				<!-- random  -->
+				<label class="getJokes-form-line">Random
+					<input id="randomCheckbox" class="getJokes-form-line-radio" onclick="displayForm()" type="radio" checked="checked" name="radio">
+					<span class="getJokes-form-line-checkmark"></span>
+				</label>
+
+				<!-- categories  -->
+				<label class="getJokes-form-line">From categories
+					<input id="categoriesCheckbox" onclick="displayForm()" class="getJokes-form-line-radio" type="radio" name="radio">
+					<span class="getJokes-form-line-checkmark"></span>
+				</label>
+				<ul id="categoriesList" class="getJokes-form-categoriesList"></ul>
+
+				<!-- search  -->
+				<label class="getJokes-form-line">Search
+					<input id="searchCheckbox" class="getJokes-form-line-radio" onclick="displayForm()" type="radio" name="radio">
+					<span class="getJokes-form-line-checkmark"></span>
+				</label>
+				<input id="searchText" class="getJokes-form-searchText" type="text" placeholder="Free text search...">
+
+				<!-- btn get joke -->
+				<button id="getJokesBtn" class="getJokes-form-btnGetAJoke" type="submit" onclick="getJoke()">Get a joke</button>
+			</form>
+		</div>
+
+		<div id="jokesID" class="jokes">
+		</div>
+	</main>
+</div>
+<script src="./js/script.js"></script>
+</body>
+</html>
