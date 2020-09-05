@@ -7,12 +7,15 @@
 
 let randomCheckbox = document.getElementById("randomCheckbox");
 let categoriesCheckbox = document.getElementById("categoriesCheckbox");
-let categoriesList = document.getElementById("categoriesList");
 let searchCheckbox = document.getElementById("searchCheckbox");
+
+let categoriesList = document.getElementById("categoriesList");
 let searchText = document.getElementById("searchText");
 let jokesID = document.getElementById("jokesID");
 
 
+
+// 1. class for each joke 
 class Jokes {
     constructor( url ) {
         this.url = url;
@@ -25,17 +28,17 @@ class Jokes {
         return Promise.resolve(categories);
     }
     
-    async getRandomJoke() {
+    async getJoke() {
         let response = await fetch ( this.url ),
-            randomJoke = await response.json();
+            gotJoke = await response.json();
 
-        return Promise.resolve(randomJoke);
+        return Promise.resolve(gotJoke);
     }
 }
 
 
 
-
+// 2. prevent event for btn submit 
 function stopDefAction(evt) {
     evt.preventDefault();
 }
@@ -46,16 +49,7 @@ getJokesBtn.addEventListener(
 
 
 
-
-function renderCategory(category) {
-    return `<li class="getJokes-form-categoriesList-item">
-                <input class="getJokes-form-categoriesList-item-radio" type="radio" name="categoriesList-radio">
-                <span class="getJokes-form-categoriesList-item-checkmark">${category}</span>
-            </li>`;
-}
-
-
-
+// 3. display form 
 let displayForm = () => {
     if (categoriesCheckbox.checked === true){
 
@@ -85,9 +79,15 @@ let displayForm = () => {
         searchText.style.display = "none";
     }
 }
-
+// 3.1. render each category in form 
+function renderCategory(category) {
+    return `<li class="getJokes-form-categoriesList-item">
+                <input class="getJokes-form-categoriesList-item-radio" type="radio" name="categoriesList-radio" value=${category}>
+                <span class="getJokes-form-categoriesList-item-checkmark">${category}</span>
+            </li>`;
+}
+// 3.2. for search line 
 searchText.addEventListener('input', searchTextChangeColor);
-
 function searchTextChangeColor() {
     if (searchText.value.length > 0) {
         searchText.style.color = "#333333";
@@ -98,19 +98,47 @@ function searchTextChangeColor() {
 
 
 
+// 4. get the joke from form 
+let getJoke = () => {
+    if (randomCheckbox.checked === true){
 
-
-
-function getCategoriesForJoke(categories) {
-    let categoriesForJoke = categories.
-                                        filter( category => category)
-                                        .map (category => {
-                                            `<span class="newJoke-content-info-categories-category">${category}</span>`
-                                        })
-                                        .join(' ');
-    return categoriesForJoke
+        new Jokes( 'https://api.chucknorris.io/jokes/random' ) 
+            .getJoke()
+            .then(
+                joke => {
+                    let newJoke = document.createElement('div');
+                    newJoke.classList.add("newJoke");
+                    newJoke.innerHTML = renderJoke(joke);
+                    jokesID.prepend(newJoke);
+                }
+            )
+    } else if (categoriesCheckbox.checked === true){
+        let categoryFromCheckbox = document.querySelector('input[name="categoriesList-radio"]:checked').value;
+        new Jokes( `https://api.chucknorris.io/jokes/random?category=${categoryFromCheckbox}` ) 
+            .getJoke()
+            .then(
+                joke => {
+                    let newJoke = document.createElement('div');
+                    newJoke.classList.add("newJoke");
+                    newJoke.innerHTML = renderJoke(joke);
+                    jokesID.prepend(newJoke);
+                }
+            )
+    } else if (searchCheckbox.checked === true){
+        let searchFromInput = document.querySelector('#searchText').value;
+        new Jokes( `https://api.chucknorris.io/jokes/search?query=${searchFromInput}` ) 
+            .getJoke()
+            .then(
+                jokes => {
+                    let newJoke = document.createElement('div');
+                    newJoke.classList.add("newJoke");
+                    newJoke.innerHTML = renderJoke(jokes.result[Math.floor(Math.random() * jokes.total)]);
+                    jokesID.prepend(newJoke);
+                }
+            )
+    }
 }
-
+// 4.1. render the joke ( markup for each one )
 function renderJoke(joke) {
     return `<img src="${joke.icon_url}" alt="Joke's icon" class="newJoke-icon">
 
@@ -137,32 +165,13 @@ function renderJoke(joke) {
                 </div>
             </div>`
 }
-
-let getCategory = () => {
-    for (line in categoriesList) {
-        console.log(line.childList);
-        // if (line.firstElementChild.checked === true) {
-        //     return String.toLowerCase(line.innerText)
-        // }
-    }
-}
-
-let getJoke = () => {
-    if (randomCheckbox.checked === true){
-
-        new Jokes( 'https://api.chucknorris.io/jokes/random' ) 
-            .getRandomJoke()
-            .then(
-                joke => {
-                    let newJoke = document.createElement('div');
-                    newJoke.classList.add("newJoke");
-                    newJoke.innerHTML = renderJoke(joke);
-                    jokesID.prepend(newJoke);
-                }
-            )
-    } else if (categoriesCheckbox.checked === true){
-
-        let category = getCategory();
-        console.log(category);
-    }
+// 4.2. get categories to display in joke
+function getCategoriesForJoke(categories) {
+    let categoriesForJoke = categories.
+                                        filter( category => category)
+                                        .map (category => {
+                                            `<input class="newJoke-content-info-categories-category" name="categoryForJoke">${category}</input>`
+                                        })
+                                        .join(' ');
+    return categoriesForJoke
 }
